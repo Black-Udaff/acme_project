@@ -16,9 +16,12 @@
     <div class="card-body">
 <form method="post">
     {% csrf_token %}
-
+    {% if not "/delete/" in request.path %}
     {% bootstrap_form form %}
-
+    {% else %}
+    <p>{{ data.first_name }} {{ data.last_name }}</p>
+    <p>{{ data.birthday }}</p>    
+    {% endif %}
     {% bootstrap_button button_type="submit" content="Отправить" %}
 
 </form>
