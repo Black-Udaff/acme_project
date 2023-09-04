@@ -4,6 +4,9 @@ from django.conf import settings
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView
 
+
+handler404 = 'core.views.page_not_found'
+
 urlpatterns = [
     path(
         'auth/registration/',

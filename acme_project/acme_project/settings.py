@@ -9,6 +9,7 @@ SECRET_KEY = (
 DEBUG = True
 LOGIN_REDIRECT_URL = 'pages:homepage'
 LOGIN_URL = 'login'
+CSRF_FAILURE_VIEW = 'core.views.csrf_failure' 
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
@@ -21,6 +22,7 @@ INSTALLED_APPS = [
     'birthday.apps.BirthdayConfig',
     'pages.apps.PagesConfig',
     'django_bootstrap5',
+    'core',
 ]
 
 MIDDLEWARE = [
