@@ -1,6 +1,7 @@
 from .form import BirthdayForm
 from .utils import calculate_birthday_countdown
 from .models import Birthday
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.views.generic import (
     ListView,
@@ -16,8 +17,18 @@ class BirthdayMixin:
     model = Birthday
 
 
-class BirthdayCreateView(BirthdayMixin, CreateView):
+class BirthdayCreateView(
+    LoginRequiredMixin,
+    BirthdayMixin,
+    CreateView,
+):
     form_class = BirthdayForm
+
+    def form_valid(self, form):
+        # Присвоить полю author объект пользователя из запроса.
+        form.instance.author = self.request.user
+        # Продолжить валидацию, описанную в форме.
+        return super().form_valid(form)
 
 
 class BirthdayListView(ListView):
